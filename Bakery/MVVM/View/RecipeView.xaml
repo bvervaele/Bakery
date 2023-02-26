@@ -1,0 +1,40 @@
+﻿<Window x:Class="Bakery.MVVM.View.RecipeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bakery.MVVM.View"
+        mc:Ignorable="d"
+        Title="RecipeView" Height="600" Width="600">
+
+    <!--<Window.Resources>
+        <CollectionViewSource x:Key="inBetweenRecipes" Source="{Binding InBetweenRecipes}" />
+        <CollectionViewSource x:Key="ingredients" Source="{Binding Ingredients}" />
+    </Window.Resources>-->
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Name="recipeName" FontSize="20"/>
+        <Label Grid.Row="1" Content="Ingredienten" FontSize="15"/>
+        <DataGrid Grid.Row="2" HorizontalAlignment="Left" Name="ingredients" VerticalAlignment="Top" ColumnWidth="*" CanUserAddRows="True" CanUserDeleteRows="True" AutoGenerateColumns="False" EnableColumnVirtualization="False" >
+            <DataGrid.Columns >
+                <DataGridComboBoxColumn Header="Naam" Width="300" x:Name="ingredientsNames" SelectedValueBinding="{Binding Name}" CanUserResize="false" IsReadOnly="False" />
+                <DataGridTextColumn Header="Hoeveelheid" Binding="{Binding Amount}" Width="200" CanUserResize="false" IsReadOnly="False" />
+                <DataGridTextColumn Header="Eenheid" Binding="{Binding Unit}" CanUserResize="false" IsReadOnly="true" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Grid.Row="3" Content="Tussen recepten" FontSize="15"/>
+        <DataGrid Grid.Row="4" HorizontalAlignment="Left" Name="inbetweenRecipes" VerticalAlignment="Top" ColumnWidth="*" CanUserAddRows="True" CanUserDeleteRows="True" AutoGenerateColumns="False" EnableColumnVirtualization="False" >
+            <DataGrid.Columns >
+                <DataGridComboBoxColumn Header="Naam" Width="0.66*" x:Name="inbetweenRecipesNames" SelectedValueBinding="{Binding Name}" CanUserResize="false" IsReadOnly="False" />
+                <DataGridTextColumn Header="Hoeveelheid" Width="0.34*" Binding="{Binding Amount}" CanUserResize="false" IsReadOnly="False" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

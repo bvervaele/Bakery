@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Bakery.MVVM.View.RecipesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Bakery.MVVM.View"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="700">
+
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="RecipyCategories" Source="{Binding AllRecipyCategories}" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Border Background="White" CornerRadius="0,20,20,0" Grid.Row="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="250" />
+                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Row="0" Grid.Column="0" Name="Filter" HorizontalAlignment="Left" Height="25" Width="250" TextChanged="Recipes_TextChanged"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" Name="categories" Height="25" Width="200"/>
+                        <DatePicker Grid.Row="0" Grid.Column="2" Name="datePicker" VerticalAlignment = "Center" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                        <Image Grid.Row="0" Grid.Column="3" Height="15" Width="15" Source="/Bakery;component/Images/Close.png" MouseLeftButtonDown="Close_MouseDown" Margin="25,10,10,35"/>
+                    </Grid>
+                </Border>
+
+                <DataGrid Grid.Row="1" HorizontalAlignment="Left" Name="recipes" VerticalAlignment="Top" ColumnWidth="*" CanUserAddRows="True" CanUserDeleteRows="True" AutoGenerateColumns="False" EnableColumnVirtualization="False" >
+                    <DataGrid.Columns >
+                        <DataGridTextColumn Header="Naam" Binding="{Binding Name}" CanUserResize="false" IsReadOnly="False"/>
+                        <DataGridComboBoxColumn Header="Categorie" ItemsSource="{Binding Source={StaticResource RecipyCategories}}" SelectedValueBinding="{Binding Category}" />
+                        <DataGridTextColumn Header="Prijs" Binding="{Binding Price}" CanUserResize="false" IsReadOnly="True" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
