@@ -106,6 +106,8 @@ namespace Bakery.MVVM.View
                 if (e.Column.Header.Equals("Naam"))
                 {
                     var el = e.EditingElement as TextBox;
+                    if (el.Text == null)
+                        return;
                     result.Name = el.Text;
                     try { dbContext.SaveChanges(); } catch { }
                 }
@@ -113,6 +115,8 @@ namespace Bakery.MVVM.View
                 if (e.Column.Header.Equals("Categorie"))
                 {
                     var el = e.EditingElement as ComboBox;
+                    if (el.SelectedValue == null)
+                        return;
                     result.Category = (RecipeCategory)el.SelectedValue;
                     try { dbContext.SaveChanges(); } catch { }
                 }

@@ -76,6 +76,8 @@ namespace Bakery.MVVM.View
                     try
                     {
                         var el = e.EditingElement as TextBox;
+                        if (el.Text == null)
+                            return;
                         DateTime newDate = DateTime.ParseExact(el.Text, "dd/MM/yyyy", null);
                         if (Prices.Where(x => x.From == newDate).Any())
                         {
@@ -97,6 +99,8 @@ namespace Bakery.MVVM.View
                 if (e.Column.Header.Equals("Prijs"))
                 {
                     var el = e.EditingElement as TextBox;
+                    if (el.Text == null)
+                        return;
                     result.Price = double.Parse(el.Text.Replace('.', ','));
                     dbContext.SaveChanges();
                 }

@@ -19,6 +19,7 @@
             <RowDefinition/>
             <RowDefinition Height="30"/>
             <RowDefinition/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Name="recipeName" FontSize="20"/>
         <Label Grid.Row="1" Content="Ingredienten" FontSize="15"/>
@@ -36,5 +37,6 @@
                 <DataGridTextColumn Header="Hoeveelheid" Width="0.34*" Binding="{Binding Amount}" CanUserResize="false" IsReadOnly="False" />
             </DataGrid.Columns>
         </DataGrid>
+        <Label Grid.Row="5" Content="Totaal gewicht:" Name="totalWeight" FontSize="15" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

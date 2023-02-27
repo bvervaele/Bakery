@@ -73,6 +73,10 @@ namespace Bakery.MVVM.View
             IngredientsNames = AllIngredients.Select(x => x.Name).ToList();
             this.inbetweenRecipesNames.ItemsSource = InBetweenRecipesNames;
             this.ingredientsNames.ItemsSource = IngredientsNames;
+            double totalWeight = 0;
+            totalWeight += Ingredients.Sum(x => x.Amount);
+            totalWeight += Recipes.Sum(x => x.Amount);
+            this.totalWeight.Content = "Totaal gewicht: " + totalWeight + "gram";
         }
 
         private void Ingredients_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -105,6 +109,8 @@ namespace Bakery.MVVM.View
                 if (e.Column.Header.Equals("Naam"))
                 {
                     var el = e.EditingElement as ComboBox;
+                    if (el.SelectedValue == null)
+                        return;
                     var Ingrientame = el.SelectedValue.ToString();
 
                     if (Ingredients.Where(x => x.Name == Ingrientame).Any())
@@ -163,6 +169,8 @@ namespace Bakery.MVVM.View
                 if (e.Column.Header.Equals("Naam"))
                 {
                     var el = e.EditingElement as ComboBox;
+                    if (el.SelectedValue == null)
+                        return;
                     var InBetweenRecipeName = el.SelectedValue.ToString();
 
                     if (Recipes.Where(x => x.Name == InBetweenRecipeName).Any())
@@ -199,8 +207,8 @@ namespace Bakery.MVVM.View
                 {
                     try
                     {
-                        Ingredient ingredient = row as Ingredient;
-                        dbContext.Ingredients.Remove(ingredient);
+                        RecipeIngredient ingredient = row as RecipeIngredient;
+                        dbContext.Recipes.SingleOrDefault(x => x.RecipeID == RecipeId).Ingredients.Remove(ingredient);
                         dbContext.SaveChanges();
                     }
                     catch (Exception) { }
@@ -218,8 +226,9 @@ namespace Bakery.MVVM.View
                 {
                     try
                     {
-                        Recipe recipe = row as Recipe;
-                        dbContext.Recipes.Remove(recipe);
+                        RecipeRecipe recipe = row as RecipeRecipe;
+                        dbContext.Recipes.SingleOrDefault(x => x.RecipeID == RecipeId).InBetweenRecipes.Remove(recipe);
+
                         dbContext.SaveChanges();
                     }
                     catch (Exception) { }
