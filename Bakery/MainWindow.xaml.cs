@@ -52,7 +52,6 @@ namespace Bakery
             //db.Add(new RecipeRecipe() { FullRecipeID = 3, InBetweenRecipeID = 2, Amount= 10 });
             //db.SaveChanges();
 
-
             //db.Recipes.Include(x => x.InBetweenRecipes).ThenInclude(x => x.InBetweenRecipe);
             //db.Recipes.Include(x => x.Ingredients).ThenInclude(x => x.Ingredient).ThenInclude(x => x.Prices);
             //foreach (Recipe recipe in db.Recipes.Include(x => x.Ingredients).ThenInclude(x => x.Ingredient).ThenInclude(x => x.Prices))

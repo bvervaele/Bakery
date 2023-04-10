@@ -22,8 +22,8 @@ namespace Bakery.Data
         {
             //var folder = Environment.SpecialFolder.LocalApplicationData;
             //var path = Environment.GetFolderPath();
-            DbPath = System.IO.Path.Join("C:\\BakeryApp", "bakery.db");
-            //DbPath = System.IO.Path.Join("C:\\Users\\Gebruiker\\OneDrive\\bakkerij simon en katlijn\\BakeryApp", "bakery.db");
+            //DbPath = System.IO.Path.Join("C:\\BakeryApp", "bakery.db");
+            DbPath = System.IO.Path.Join("C:\\Users\\Gebruiker\\OneDrive\\bakkerij simon en katlijn\\BakeryApp", "bakery.db");
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
                 => options.UseSqlite($"Data Source={DbPath}");

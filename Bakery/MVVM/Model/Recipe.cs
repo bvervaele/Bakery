@@ -14,6 +14,8 @@ namespace Bakery.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RecipeID { get; set; }
         public string Name { get; set; }
+        public int Pieces { get; set; } = 1;
+        public double WorkingMinutes { get; set; } = 0;
         public RecipeCategory Category { get; set; }
 
         public List<RecipeIngredient> Ingredients { get; set; } = new List<RecipeIngredient>();
@@ -39,12 +41,14 @@ namespace Bakery.Models
                 totalAmount += InBetweenRecipes.Sum(x => x.Amount);
             }
 
+            totalPrice += 0.605 * WorkingMinutes;
+
             if (totalAmount == 0)
                 Price = 0;
             else if (Category == RecipeCategory.TussenProduct)
                 Price = totalPrice / totalAmount;
             else
-                Price = totalPrice;
+                Price = totalPrice / Pieces;
         }
     }
 

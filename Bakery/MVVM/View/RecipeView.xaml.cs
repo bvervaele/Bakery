@@ -73,6 +73,10 @@ namespace Bakery.MVVM.View
             IngredientsNames = AllIngredients.Select(x => x.Name).ToList();
             this.inbetweenRecipesNames.ItemsSource = InBetweenRecipesNames;
             this.ingredientsNames.ItemsSource = IngredientsNames;
+            this.WorkingMinutes.Text = "" + recipe.WorkingMinutes;
+            this.Pieces.Text = "" + recipe.Pieces;
+            this.Pieces.Visibility = recipe.Category == RecipeCategory.TussenProduct ? Visibility.Hidden : Visibility.Visible;
+            this.Pieces_Text.Visibility = recipe.Category == RecipeCategory.TussenProduct ? Visibility.Hidden : Visibility.Visible;
             double totalWeight = 0;
             totalWeight += Ingredients.Sum(x => x.Amount);
             totalWeight += Recipes.Sum(x => x.Amount);
@@ -234,6 +238,45 @@ namespace Bakery.MVVM.View
                     catch (Exception) { }
                 }
                 UpdateTable();
+            }
+        }
+        private void Pieces_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            Recipe recipe = dbContext.Recipes.SingleOrDefault(x => x.RecipeID == RecipeId);
+            try
+            {
+                int pieces = int.Parse(textBox.Text);
+                if (recipe.Pieces == pieces)
+                    return;
+                recipe.Pieces = pieces;
+                //dbContext.Recipes.Attach(new Recipe());
+                //dbContext.Entry(new Recipe()).Property(x => x.Pieces).IsModified = true;
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
+
+        private void WorkingMinutes_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            Recipe recipe = dbContext.Recipes.SingleOrDefault(x => x.RecipeID == RecipeId);
+            try
+            {
+                int workingMinutes = int.Parse(textBox.Text);
+                if (recipe.WorkingMinutes == workingMinutes)
+                    return;
+                recipe.WorkingMinutes = workingMinutes;
+                //dbContext.Recipes.Attach(new Recipe());
+                //dbContext.Entry(new Recipe()).Property(x => x.Pieces).IsModified = true;
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return;
             }
         }
     }

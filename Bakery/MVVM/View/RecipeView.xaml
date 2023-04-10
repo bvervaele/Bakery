@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bakery.MVVM.View"
         mc:Ignorable="d"
-        Title="RecipeView" Height="600" Width="600">
+        Title="RecipeView" Height="700" Width="600">
 
     <!--<Window.Resources>
         <CollectionViewSource x:Key="inBetweenRecipes" Source="{Binding InBetweenRecipes}" />
@@ -20,8 +20,20 @@
             <RowDefinition Height="30"/>
             <RowDefinition/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Name="recipeName" FontSize="20"/>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Name="recipeName" FontSize="20"/>
+            <Label Grid.Column="1" Name="Pieces_Text" Content="Stuks: " HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
+            <TextBox Grid.Column="2" Name="Pieces" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="30" TextChanged="Pieces_TextChanged"/>
+        </Grid>
         <Label Grid.Row="1" Content="Ingredienten" FontSize="15"/>
         <DataGrid Grid.Row="2" HorizontalAlignment="Left" Name="ingredients" VerticalAlignment="Top" ColumnWidth="*" CanUserAddRows="True" CanUserDeleteRows="True" AutoGenerateColumns="False" EnableColumnVirtualization="False" >
             <DataGrid.Columns >
@@ -37,6 +49,15 @@
                 <DataGridTextColumn Header="Hoeveelheid" Width="0.34*" Binding="{Binding Amount}" CanUserResize="false" IsReadOnly="False" />
             </DataGrid.Columns>
         </DataGrid>
-        <Label Grid.Row="5" Content="Totaal gewicht:" Name="totalWeight" FontSize="15" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
+        <Label Grid.Row="5" Content="Werkuren" FontSize="15"/>
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Name="WorkingMinutes" HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="40" TextChanged="WorkingMinutes_TextChanged"/>
+            <Label Grid.Column="1" Content="minuten " HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15"/>
+        </Grid>
+        <Label Grid.Row="8" Content="Totaal gewicht:" Name="totalWeight" FontSize="15" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
